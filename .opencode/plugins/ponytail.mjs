@@ -105,7 +105,7 @@ function parseSkillFile(skillDir) {
     id: path.basename(skillDir),
     name: fields.name,
     description: fields.description,
-    location: file,
+    path: file,
     content: match[2].trim(),
   };
 }
@@ -170,7 +170,8 @@ const v2 = definePlugin({
 
     // Register the skills shipped beside the plugin. V1 pointed
     // config.skills.paths at the directory; V2 has no config hook, so add each
-    // parsed skill instead.
+    // parsed skill instead. Skill.Info requires { id, name, path, content } —
+    // `path` (not `location`) per the V2 server schema.
     await ctx.skill.transform((editor) => {
       for (const skill of skills) editor.add(skill);
     });

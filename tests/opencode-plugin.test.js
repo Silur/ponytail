@@ -73,7 +73,7 @@ test('V2 setup registers commands, skills, and the context hook', async () => {
   assert.ok(skill, 'ponytail skill not registered');
   assert.equal(skill.name, 'ponytail');
   assert.match(skill.description, /laziest solution/i);
-  assert.ok(skill.location.endsWith('SKILL.md'));
+  assert.ok(skill.location === undefined && skill.path.endsWith('SKILL.md'));
   assert.ok(skill.content.length > 0);
   assert.equal(typeof reg.contextHook, 'function');
 });
